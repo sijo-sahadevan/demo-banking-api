@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,8 @@ public class TransactionController {
 	@Autowired
 	TransactionService service;
 
+	Logger logger = LoggerFactory.getLogger(TransactionController.class);
+
 	@GetMapping("/transaction/new/{userid}/{faccount}/{toaccount}/{desc}/{amount}")
 	public int makeTransfer(@PathVariable Map<String, String> params) {
 		String userID = params.get("userid");
@@ -29,7 +33,8 @@ public class TransactionController {
 		String toAccount = params.get("toaccount");
 		String description = params.get("desc");
 		BigDecimal amount = new BigDecimal(params.get("amount"));
-
+		logger.info("request - make transfer for the user '" + userID + "' from account '" + fromAccount
+				+ "' to account '" + toAccount + "' for the amount '" + amount + "'.");
 		return (int) service.doTransfer(userID, fromAccount, toAccount, description, amount);
 	}
 
@@ -58,7 +63,8 @@ public class TransactionController {
 		} catch (Exception e) {
 
 		}
-
+		logger.info("request - fetch transactions for user '" + userID + "' & account '" + accountNumber
+				+ "' between the dates '" + startDate + "' and '" + endDate + "'.");
 		return (List<Transaction>) service.getTransactions(userID, accountNumber, startDateTimestamp, endDateTimestamp,
 				status);
 	}
