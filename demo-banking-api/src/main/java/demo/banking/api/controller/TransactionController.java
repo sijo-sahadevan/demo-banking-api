@@ -33,7 +33,7 @@ public class TransactionController {
 		String toAccount = params.get("toaccount");
 		String description = params.get("desc");
 		BigDecimal amount = new BigDecimal(params.get("amount"));
-		logger.info("request - make transfer for the user '" + userID + "' from account '" + fromAccount
+		logger.debug("request - make transfer for the user '" + userID + "' from account '" + fromAccount
 				+ "' to account '" + toAccount + "' for the amount '" + amount + "'.");
 		return (int) service.doTransfer(userID, fromAccount, toAccount, description, amount);
 	}
@@ -63,7 +63,7 @@ public class TransactionController {
 		} catch (Exception e) {
 
 		}
-		logger.info("request - fetch transactions for user '" + userID + "' & account '" + accountNumber
+		logger.debug("request - fetch transactions for user '" + userID + "' & account '" + accountNumber
 				+ "' between the dates '" + startDate + "' and '" + endDate + "'.");
 		return (List<Transaction>) service.getTransactions(userID, accountNumber, startDateTimestamp, endDateTimestamp,
 				status);

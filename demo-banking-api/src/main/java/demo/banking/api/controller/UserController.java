@@ -22,7 +22,7 @@ public class UserController {
 
 	@GetMapping("/user/{userid}/{password}")
 	public boolean validateUser(@PathVariable("userid") String userID, @PathVariable("password") String password) {
-		logger.info("request - validate user '" + userID + "'.");
+		logger.debug("request - validate user '" + userID + "'.");
 		return service.validateUser(userID, password);
 	}
 
@@ -31,7 +31,7 @@ public class UserController {
 		String userID = params.get("userid");
 		String currentPassword = params.get("currentpwd");
 		String newPassword = params.get("newpwd");
-		logger.info("request - update password for the user '" + userID + "'.");
+		logger.debug("request - update password for the user '" + userID + "'.");
 		return service.updatePassword(userID, currentPassword, newPassword);
 	}
 }

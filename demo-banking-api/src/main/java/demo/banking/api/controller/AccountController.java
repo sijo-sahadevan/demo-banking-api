@@ -33,7 +33,7 @@ public class AccountController {
 		String userID = params.get("userid");
 		String accountID = params.get("accountid");
 		String nickName = params.get("nickname");
-		logger.info("request - fetch create or update account nickname for the account '" + accountID + "' & user '"
+		logger.debug("request - fetch create or update account nickname for the account '" + accountID + "' & user '"
 				+ userID + "'.");
 		service.createORUpdateAccountNickName(userID, accountID, nickName);
 	}
